@@ -22,17 +22,17 @@ var MiniBeat = function(feed){
 	var MB = this;
 	
 	//fields / model
-	this.pages = null;
-	this.current = -1;
-	this.feed = feed;
-	this.interval = null;
+	MB.pages = null;
+	MB.current = -1;
+	MB.feed = feed;
+	MB.interval = null;
 	
 	//methods
 	//get data and render, then repeat every 10 seconds
-	this.init = function(){
+	MB.init = function(){
 		refreshModel();
-		if(!this.interval){
-			this.interval = setInterval(function(){
+		if(!MB.interval){
+			MB.interval = setInterval(function(){
 				refreshModel();
 			},10000);
 		}
@@ -73,27 +73,27 @@ var MiniBeat = function(feed){
 		return row;
 	};
 	//clear pages then add elements back
-	this.printPages = function(){
+	MB.printPages = function(){
 		console.log("printPages");
 		var pages_div = document.getElementById("pages");
-		var pages = this.pages;
+		var pages = MB.pages;
 		pages_div.innerHTML = "";
 		for(var i = 0; i < pages.length; i++){
 			pages_div.appendChild(getSinglePageRow(i));
 		}
-		this.printDetails();
+		MB.printDetails();
 	};
 	//clear details then render if a page is selected 
-	this.printDetails = function(){
+	MB.printDetails = function(){
 		var header = document.getElementById("side-header");
 		var details = document.getElementById("details");
 		details.innerHTML = "";
-		if(this.current < 0){
+		if(MB.current < 0){
 			header.innerHTML = "Select a page";
 			return;
 		}
 		else{
-			var current_page = this.pages[this.current];
+			var current_page = MB.pages[MB.current];
 			header.innerHTML = current_page.title + " details";
 			var toprefs = current_page.stats.toprefs;
 			for (var i = 0; i < toprefs.length; i++) {
